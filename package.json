@@ -7,7 +7,7 @@
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
-    "test": "cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    "test": "cross-env NODE_ENV=test mocha --reporter spec --exit"
   },
   "license": "ISC",
   "dependencies": {
