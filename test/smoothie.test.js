@@ -20,19 +20,19 @@ describe("GET /api/smoothies", function() {
   it("should find all smoothies", function(done) {
     // Add some examples to the db to test with
     db.Smoothie.bulkCreate([
-      { 
+      {
         name: "First Smoothie",
-        image_url: "first image",
-        description: "First Description", 
+        imageURL: "first image",
+        description: "First Description",
         rating: "first rating",
         author: "first author"
       },
       {
         name: "Second Smoothie",
-        image_url: "second image"
+        imageURL: "second image",
         description: "Second Description",
         rating: "second rating",
-        author: "second author" 
+        author: "second author"
       }
     ]).then(function() {
       // Request the route that returns all smoothies
@@ -52,11 +52,17 @@ describe("GET /api/smoothies", function() {
 
         expect(responseBody[0])
           .to.be.an("object")
-          .that.includes({ name: "First Smoothie", description: "First Description" });
+          .that.includes({
+            name: "First Smoothie",
+            description: "First Description"
+          });
 
         expect(responseBody[1])
           .to.be.an("object")
-          .that.includes({ name: "Second Smoothie", description: "Second Description" });
+          .that.includes({
+            name: "Second Smoothie",
+            description: "Second Description"
+          });
 
         // The `done` function is used to end any asynchronous tests
         done();
