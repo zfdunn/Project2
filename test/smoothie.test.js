@@ -20,8 +20,20 @@ describe("GET /api/smoothies", function() {
   it("should find all smoothies", function(done) {
     // Add some examples to the db to test with
     db.Smoothie.bulkCreate([
-      { name: "First Smoothie", description: "First Description" },
-      { name: "Second Smoothie", description: "Second Description" }
+      { 
+        name: "First Smoothie",
+        image_url: "first image",
+        description: "First Description", 
+        rating: "first rating",
+        author: "first author"
+      },
+      {
+        name: "Second Smoothie",
+        image_url: "second image"
+        description: "Second Description",
+        rating: "second rating",
+        author: "second author" 
+      }
     ]).then(function() {
       // Request the route that returns all smoothies
       request.get("/api/smoothies").end(function(err, res) {

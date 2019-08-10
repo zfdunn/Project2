@@ -21,7 +21,10 @@ describe("POST /api/smoothies", function() {
     // Create an object to send to the endpoint
     var reqBody = {
       name: "Smoothie text",
-      description: "Smoothie description"
+      image_url: "Smoothie img",
+      description: "Smoothie description",
+      rating: "Smoothie Rating",
+      author: "Smoothie Author"
     };
 
     // POST the request body to the server
