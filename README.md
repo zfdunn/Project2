@@ -1,1 +1,1 @@
-# Project2
+For this project, we created a site where smoothie recipes could be captured in a database. We used Sequelize, SQL, node, Javascript, Bootstrap.
