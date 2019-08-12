@@ -24,14 +24,14 @@ describe("GET /api/smoothies", function() {
         name: "First Smoothie",
         imageURL: "first image",
         description: "First Description",
-        rating: "first rating",
+        rating: 1,
         author: "first author"
       },
       {
         name: "Second Smoothie",
         imageURL: "second image",
         description: "Second Description",
-        rating: "second rating",
+        rating: 2,
         author: "second author"
       }
     ]).then(function() {
@@ -54,14 +54,20 @@ describe("GET /api/smoothies", function() {
           .to.be.an("object")
           .that.includes({
             name: "First Smoothie",
-            description: "First Description"
+            imageURL: "first image",
+            description: "First Description",
+            rating: 1,
+            author: "first author"
           });
 
         expect(responseBody[1])
           .to.be.an("object")
           .that.includes({
             name: "Second Smoothie",
-            description: "Second Description"
+            imageURL: "second image",
+            description: "Second Description",
+            rating: 2,
+            author: "second author"
           });
 
         // The `done` function is used to end any asynchronous tests

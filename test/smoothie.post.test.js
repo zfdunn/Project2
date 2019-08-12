@@ -23,7 +23,7 @@ describe("POST /api/smoothies", function() {
       name: "Smoothie text",
       imageURL: "Smoothie img",
       description: "Smoothie description",
-      rating: "Smoothie Rating",
+      rating: 1,
       author: "Smoothie Author"
     };
 
