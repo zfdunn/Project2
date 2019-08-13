@@ -1,47 +1,47 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $smoothieText = $("#smoothie-text");
+var $smoothieDescription = $("#smoothie-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $smoothieList = $("#smoothie-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveSmoothie: function(smoothie) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/smoothie",
+      data: JSON.stringify(smoothie)
     });
   },
-  getExamples: function() {
+  getsmoothies: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/smoothie",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deletesmoothie: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/smoothie/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+// refreshsmoothie gets new smoothie from the db and repopulates the list
+var refreshsmoothie = function() {
+  API.getsmoothie().then(function(data) {
+    var $smoothie = data.map(function(smoothie) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(smoothie.text)
+        .attr("href", "/smoothie/" + smoothie.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": smoothie.id
         })
         .append($a);
 
@@ -54,46 +54,46 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $smoothieList.empty();
+    $smoothieList.append($smoothie);
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new smoothie
+// Save the new smoothie to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var smoothie = {
+    text: $smoothieText.val().trim(),
+    description: $smoothieDescription.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(smoothie.text && smoothie.description)) {
+    alert("You must enter an smoothie text and description!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.savesmoothie(smoothie).then(function() {
+    refreshsmoothie();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $smoothieText.val("");
+  $smoothieDescription.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// handleDeleteBtnClick is called when an smoothie's delete button is clicked
+// Remove the smoothie from the db and refresh the list
 var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deletesmoothie(idToDelete).then(function() {
+    refreshsmoothie();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$smoothieList.on("click", ".delete", handleDeleteBtnClick);

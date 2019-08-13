@@ -3,19 +3,21 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Smoothie.findAll({}).then(function(dbSmoothies) {
+    db.Smoothie.findAll({}).then(function(dbSmoothie) {
       res.render("index", {
-        msg: "Welcome!",
-        examples: dbSmoothies
+        msg: "Smoothie Project",
+        examples: "dbExample"
       });
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Smoothie.findOne({ where: { id: req.params.id } }).then(function(dbSmoothies) {
+  // Load example page and pass in an Smoothie by id
+  app.get("/smoothie/:id", function(req, res) {
+    db.Smoothie.findOne({ where: { id: req.params.id } }).then(function(
+      dbSmoothie
+    ) {
       res.render("example", {
-        example: dbSmoothies
+        example: "dbExample"
       });
     });
   });
